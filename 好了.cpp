@@ -1,3 +1,5 @@
+//11327104 林采寧 11327111 林方晴
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -287,21 +289,3 @@ void PrimaryIndex::PrintPrimaryIndex() {
 }
 
 void PrimaryIndex::EstablishPrimaryIndex (std::string fileNo) {
-    std::string orderFile = "order" + fileNo + ".bin";
-    Edge edge;
-    float preWeight = -1;
-    int offset = 0;
-    std::ifstream fin(orderFile, std::ios::binary);
-    while (fin.read((char*)&edge, sizeof(edge))) { // 每次讀一筆
-        if (edge.weight != preWeight) { // 是新的weight了
-            Index index;
-            index.weight = edge.weight;
-            index.offset = offset;
-            primaryIndex.push_back(index);
-            preWeight = edge.weight;
-        }
-        offset++;// 繼續下一筆
-    }
-    fin.close();
-    PrintPrimaryIndex();
-}

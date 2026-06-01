@@ -55,8 +55,13 @@ int main() {
         std::cout << "\nInput the file name: [0]Quit\n";
         std::string fileNo;
         while (!GetFileNum(fileNo)) {
-            if (fileNo == "0") return 0;
+            if (fileNo == "0") break;
             std::cout << "\nInput the file name: [0]Quit\n";
+        }
+        if (fileNo == "0") {
+            std::cout << "\n[0]Quit or [Any other key]continue?\n";
+            std::cin >> temp;
+            continue;
         }
         ExternalSorter externalSorter;
         externalSorter.SetFileNum(fileNo);

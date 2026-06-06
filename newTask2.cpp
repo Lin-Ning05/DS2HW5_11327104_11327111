@@ -176,6 +176,7 @@ void ExternalSorter::mergeTwoFiles(std::string file1, std::string file2, std::st
             size1 = fin1.gcount() / sizeof(Edge);
             if (size1 == 0) {//沒有1了就把剩下的2寫完
                 fout.write((char*)outBuffer.data(), posOut * sizeof(Edge));
+                outBuffer.clear();
                 posOut = 0;
                 while (pos2 < size2) {
                     fout.write((char*)&buffer2[pos2], sizeof(Edge));
@@ -187,6 +188,7 @@ void ExternalSorter::mergeTwoFiles(std::string file1, std::string file2, std::st
                     size2 = fin2.gcount() / sizeof(Edge);
                     if (size2 == 0) break;
                     fout.write((char*)buffer2.data(), size2 * sizeof(Edge));
+                    buffer2.clear();
                 }
                 break;
             }
@@ -197,6 +199,7 @@ void ExternalSorter::mergeTwoFiles(std::string file1, std::string file2, std::st
             size2 = fin2.gcount() / sizeof(Edge);
             if (size2 == 0) {
                 fout.write((char*)outBuffer.data(), posOut * sizeof(Edge));
+                outBuffer.clear();
                 posOut = 0;
                 while (pos1 < size1) {
                     fout.write((char*)&buffer1[pos1], sizeof(Edge));
@@ -208,6 +211,7 @@ void ExternalSorter::mergeTwoFiles(std::string file1, std::string file2, std::st
                     size1 = fin1.gcount() / sizeof(Edge);
                     if (size1 == 0) break;
                     fout.write((char*)buffer1.data(), size1 * sizeof(Edge));
+                    buffer1.clear();
                 }
                 break;
             }
@@ -216,12 +220,14 @@ void ExternalSorter::mergeTwoFiles(std::string file1, std::string file2, std::st
         // buffer滿了再一次寫出
         if (posOut == 100) {
             fout.write((char*)outBuffer.data(), 100 * sizeof(Edge));
+            outBuffer.clear();
             posOut = 0;
         }
     }
 
     if (!outBuffer.empty()) {
         fout.write((char*)outBuffer.data(), posOut * sizeof(Edge));
+        outBuffer.clear();
     }
 
     fin1.close();

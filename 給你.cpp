@@ -398,7 +398,8 @@ void PrimaryIndex::RangeSearch (std::string fileNo) {
     float range1 = 0 , range2 = 0;
     std::cout << "Input a floating number in [0.01, 1]: \n\n";
     while (std::cin >> temp) {
-        if (std::cin >> temp) {
+        if (IsDouble(temp)) {
+            range1 = stof(temp);
             if (range1 > 1 || range1 < 0.01) {
                 std::cout << "### It is NOT in [0.01,1] ###\n\n";
             } else break;
@@ -406,8 +407,9 @@ void PrimaryIndex::RangeSearch (std::string fileNo) {
         std::cout << "Input a floating number in [0.01, 1]: \n\n";
     }
     std::cout << "Input a floating number in [0.01, 1]: \n\n";
-    while (true) {
-        if (std::cin >> range2) {
+    while (std::cin >> temp) {
+        if (IsDouble(temp)) {
+            range2 = stof(temp);
             if (range2 > 1 || range2 < 0.01) {
                 std::cout << "### It is NOT in [0.01,1] ###\n\n";
             } else break;

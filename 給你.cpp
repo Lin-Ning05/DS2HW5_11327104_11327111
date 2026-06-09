@@ -107,11 +107,22 @@ int main() {
         PrimaryIndex primaryIndex;
         primaryIndex.EstablishPrimaryIndex(fileNo, canUseSize);
 
-        
-        std::cout << "##################################" << std::endl;
-        std::cout << "* 3: Range search to build index *" << std::endl;
-        std::cout << "##################################\n" << std::endl;
-        primaryIndex.RangeSearch(fileNo);
+        std::string temp2;
+        do {
+            std::cout << "##################################" << std::endl;
+            std::cout << "* 3: Range search to build index *" << std::endl;
+            std::cout << "##################################\n" << std::endl;
+            primaryIndex.RangeSearch(fileNo);
+            std::string temp1;
+            do {
+                std::cout << "Input a student ID ([4] Quit): ";
+                std::cin >> temp1;
+                //做四
+            } while (temp1 != "4");
+
+            std::cout << "[3]Quit or [Any other key]continue?";
+            std::cin >> temp2;
+        } while (temp2 != "3");
 
         std::cout << "[0]Quit or [Any other key]continue?\n\n";
         std::cin >> temp;
